@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
 }
 
@@ -15,4 +15,24 @@ model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
+}
+
+model WorkoutLog {
+  id        Int                @id @default(autoincrement())
+  date      DateTime           @unique
+  userId    Int
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  details   WorkoutLogDetail[]
+}
+
+model WorkoutLogDetail {
+  id              Int        @id @default(autoincrement())
+  logId           Int
+  exerciseName    String // 운동 이름 (e.g., "벤치 프레스")
+  weight          Float // kg 단위
+  sets            Int // 세트 수
+  reps            Int // 세트당 반복 횟수
+  restTimeSeconds Int // 세트 사이 휴식 시간 (초 단위)
+  workoutLog      WorkoutLog @relation(fields: [logId], references: [id], onDelete: Cascade)
 }
