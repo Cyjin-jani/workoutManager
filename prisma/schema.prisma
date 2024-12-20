@@ -14,5 +14,12 @@ datasource db {
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   name  String?
+  profileSrc  String?
+  age  Int?
+  height  Float?
+  weight  Float?
+  gender  String?
 }
