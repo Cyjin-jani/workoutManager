@@ -21,7 +21,7 @@ CREATE TABLE "WorkoutLogDetail" (
     "exerciseName" TEXT NOT NULL,
     "weight" REAL NOT NULL,
     "sets" INTEGER NOT NULL,
-    "reps" INTEGER NOT NULL,
+    "repeats" INTEGER NOT NULL,
     "restTimeSeconds" INTEGER NOT NULL,
     CONSTRAINT "WorkoutLogDetail_logId_fkey" FOREIGN KEY ("logId") REFERENCES "WorkoutLog" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
