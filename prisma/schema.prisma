@@ -19,7 +19,7 @@ model User {
 
 model WorkoutLog {
   id        Int                @id @default(autoincrement())
-  date      DateTime           @unique
+  date      DateTime
   userId    Int
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
