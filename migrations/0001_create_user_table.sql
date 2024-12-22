@@ -5,7 +5,7 @@ CREATE TABLE "User" (
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "name" TEXT,
-    "profileSrc" TEXT,
+    "profileUrl" TEXT,
     "age" INTEGER,
     "height" FLOAT,
     "weight" FLOAT,

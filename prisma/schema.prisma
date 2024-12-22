@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
 }
 
@@ -12,14 +12,14 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  name  String?
-  profileSrc  String?
-  age  Int?
-  height  Float?
-  weight  Float?
-  gender  String?
+  name       String?
+  profileUrl String?
+  age        Int?
+  height     Float?
+  weight     Float?
+  gender     String?
 }
