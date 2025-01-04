@@ -12,25 +12,27 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id         Int          @id @default(autoincrement())
+  email      String       @unique
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
   name       String?
   profileUrl String?
   age        Int?
   height     Float?
   weight     Float?
   gender     String?
+  WorkoutLog WorkoutLog[]
 }
 
 model WorkoutLog {
   id        Int                @id @default(autoincrement())
   date      DateTime
-  userId    Int
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
   details   WorkoutLogDetail[]
+  User      User               @relation(fields: [userId], references: [id])
+  userId    Int
 }
 
 model WorkoutLogDetail {
