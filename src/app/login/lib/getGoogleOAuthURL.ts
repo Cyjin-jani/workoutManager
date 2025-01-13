@@ -1,9 +1,7 @@
-import { getGoogleLoginRedirectUri } from './getGoogleLoginRedirectUri';
-
 export const getGoogleOAuthURL = () => {
   const params = new URLSearchParams({
     client_id: process.env.GOOGLE_CLIENT_ID ?? '',
-    redirect_uri: getGoogleLoginRedirectUri(),
+    redirect_uri: `${process.env.NEXT_PUBLIC_REDIRECT_URI}/login/google/callback`,
     scope: [
       'https://www.googleapis.com/auth/userinfo.email',
       'https://www.googleapis.com/auth/userinfo.profile',
