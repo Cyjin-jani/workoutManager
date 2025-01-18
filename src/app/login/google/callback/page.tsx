@@ -48,7 +48,11 @@ export default function Page() {
         });
 
         if (!user) {
-          // TODO: 유저가 존재하지 않는 경우 유저 생성 로직 추가
+          await axios.post('/api/users', {
+            email: userEmail,
+            name: result.name,
+            profileUrl: result.picture,
+          });
         }
 
         // TODO: 세션/쿠키 설정하기 (로그인 처리)
