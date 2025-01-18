@@ -39,11 +39,17 @@ export default function Page() {
             },
           },
         );
-        console.log('🚀 ~ handleAuth ~ result:', result);
 
-        // TODO: 유저 존재 여부 확인 (with email)
+        const userEmail = result.email;
+        const { data: user } = await axios.get(`/api/auth/verify-user`, {
+          params: {
+            email: userEmail,
+          },
+        });
 
-        // TODO: 유저가 존재하지 않는 경우 유저 생성 로직 추가
+        if (!user) {
+          // TODO: 유저가 존재하지 않는 경우 유저 생성 로직 추가
+        }
 
         // TODO: 세션/쿠키 설정하기 (로그인 처리)
 
