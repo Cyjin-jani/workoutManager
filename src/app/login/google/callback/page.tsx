@@ -39,7 +39,6 @@ export default function Page() {
             },
           },
         );
-
         const userEmail = result.email;
         const { data: user } = await axios.get(`/api/auth/verify-user`, {
           params: {
@@ -56,7 +55,6 @@ export default function Page() {
         }
 
         // TODO: 세션/쿠키 설정하기 (로그인 처리)
-
         router.push('/');
       } catch (error) {
         console.error('Login failed:', error);
