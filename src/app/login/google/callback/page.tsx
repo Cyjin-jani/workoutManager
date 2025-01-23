@@ -3,6 +3,8 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { AUTH_ACCESS_TOKEN, COOKIE_EXPIRE_IN_1_WEEK } from '../../constants';
 
 type GoogleUserInfo = {
   email: string;
@@ -54,7 +56,8 @@ export default function Page() {
           });
         }
 
-        // TODO: 세션/쿠키 설정하기 (로그인 처리)
+        // TODO: 추후 세션 설정, refresh token 등 처리하기 (일단 단순 로그인 처리)
+        Cookies.set(AUTH_ACCESS_TOKEN, access_token, { expires: COOKIE_EXPIRE_IN_1_WEEK });
         router.push('/');
       } catch (error) {
         console.error('Login failed:', error);
