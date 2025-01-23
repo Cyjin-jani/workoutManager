@@ -5,8 +5,15 @@ import axios from 'axios';
 
 interface User {
   id: number;
-  name: string;
   email: string;
+  name: string | null;
+  profileUrl: string | null;
+  age: number | null;
+  height: number | null;
+  weight: number | null;
+  gender: string | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
 const fetchUsers = async (): Promise<User[]> => {
