@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { AUTH_ACCESS_TOKEN, COOKIE_EXPIRE_IN_1_WEEK } from '../../constants';
+import { AUTH_ACCESS_TOKEN, COOKIE_EXPIRE_IN_1_WEEK } from '@/app/login/constants';
 
 type GoogleUserInfo = {
   email: string;

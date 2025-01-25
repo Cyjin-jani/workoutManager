@@ -1,5 +1,5 @@
+import { getGoogleOAuthURL } from '@/app/login/lib/getGoogleOAuthURL';
 import Image from 'next/image';
-import { getGoogleOAuthURL } from './lib/getGoogleOAuthURL';
 
 export default function Login() {
   const href = getGoogleOAuthURL();

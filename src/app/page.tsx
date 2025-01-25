@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { AUTH_ACCESS_TOKEN } from './login/constants';
+import { AUTH_ACCESS_TOKEN } from '@/app/login/constants';
 
 export default async function Home() {
   const cookieStore = await cookies();
