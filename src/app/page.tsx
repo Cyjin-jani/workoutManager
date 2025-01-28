@@ -1,6 +1,6 @@
+import { AUTH_ACCESS_TOKEN } from '@/app/api/auth/login/route';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { AUTH_ACCESS_TOKEN } from '@/app/login/constants';
 
 export default async function Home() {
   const cookieStore = await cookies();
