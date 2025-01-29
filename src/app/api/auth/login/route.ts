@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import type { User } from '@prisma/client';
 import { createAccessToken } from '@/app/lib/auth';
-import { AUTH_ACCESS_TOKEN } from '@/app/login/google/callback/page';
+import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
 
 type RequestBody = {
   token: string;

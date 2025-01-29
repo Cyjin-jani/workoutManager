@@ -3,8 +3,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-
-export const AUTH_ACCESS_TOKEN = 'access_token';
+import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
 
 export default function Page() {
   const router = useRouter();
