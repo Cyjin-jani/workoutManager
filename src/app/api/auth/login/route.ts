@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import type { User } from '@prisma/client';
+import { createAccessToken } from '@/app/lib/auth';
 
 type RequestBody = {
   token: string;
@@ -42,7 +43,7 @@ export async function POST(request: NextRequest) {
   const user = (await userResponse.json()) as User;
 
   if (!user) {
-    await fetch(`${process.env.API_BASE_URL}/api/users`, {
+    const createUserResponse = await fetch(`${process.env.API_BASE_URL}/api/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,11 +54,25 @@ export async function POST(request: NextRequest) {
         profileUrl: googleUser.picture,
       }),
     });
+    const newUser = (await createUserResponse.json()) as User;
+    // JWT 토큰 생성
+    const accessToken = await createAccessToken(newUser.id);
+    const response = NextResponse.json({ message: '로그인 성공' }, { status: 200 });
+
+    response.cookies.set(AUTH_ACCESS_TOKEN, accessToken, {
+      path: '/',
+      httpOnly: true,
+      maxAge: COOKIE_EXPIRE_IN_1_WEEK * 24 * 60 * 60,
+    });
+
+    return response;
   }
 
+  // JWT 토큰 생성
+  const accessToken = await createAccessToken(user.id);
   const response = NextResponse.json({ message: '로그인 성공' }, { status: 200 });
 
-  response.cookies.set(AUTH_ACCESS_TOKEN, token, {
+  response.cookies.set(AUTH_ACCESS_TOKEN, accessToken, {
     path: '/',
     httpOnly: true,
     maxAge: COOKIE_EXPIRE_IN_1_WEEK * 24 * 60 * 60,
