@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
+export const AUTH_ACCESS_TOKEN = 'access_token';
+
 export default function Page() {
   const router = useRouter();
 
@@ -11,9 +13,9 @@ export default function Page() {
     const handleAuth = async () => {
       const hash = location.hash.slice(1);
       const searchParams = new URLSearchParams(hash);
-      const access_token = searchParams.get('access_token');
+      const accessToken = searchParams.get(AUTH_ACCESS_TOKEN);
 
-      if (!access_token) {
+      if (!accessToken) {
         console.error('No access token found');
         router.push('/login');
         return;
@@ -21,7 +23,7 @@ export default function Page() {
 
       try {
         await axios.post('/api/auth/login', {
-          token: access_token,
+          token: accessToken,
         });
         router.push('/');
       } catch (error) {

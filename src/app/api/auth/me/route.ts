@@ -1,7 +1,7 @@
 import { get } from '@/app/lib/cf';
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAccessToken } from '@/app/lib/auth';
-import { AUTH_ACCESS_TOKEN } from '../login/route';
+import { AUTH_ACCESS_TOKEN } from '@/app/login/google/callback/page';
 
 export const runtime = 'edge';
 

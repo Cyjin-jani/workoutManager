@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import type { User } from '@prisma/client';
 import { createAccessToken } from '@/app/lib/auth';
+import { AUTH_ACCESS_TOKEN } from '@/app/login/google/callback/page';
 
 type RequestBody = {
   token: string;
@@ -19,8 +20,7 @@ type GoogleUserInfo = {
 };
 
 export const runtime = 'edge';
-export const AUTH_ACCESS_TOKEN = 'access_token';
-export const COOKIE_EXPIRE_IN_1_WEEK = 7;
+const COOKIE_EXPIRE_IN_1_WEEK = 7;
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -55,7 +55,6 @@ export async function POST(request: NextRequest) {
       }),
     });
     const newUser = (await createUserResponse.json()) as User;
-    // JWT 토큰 생성
     const accessToken = await createAccessToken(newUser.id);
     const response = NextResponse.json({ message: '로그인 성공' }, { status: 200 });
 
@@ -68,7 +67,6 @@ export async function POST(request: NextRequest) {
     return response;
   }
 
-  // JWT 토큰 생성
   const accessToken = await createAccessToken(user.id);
   const response = NextResponse.json({ message: '로그인 성공' }, { status: 200 });
 
