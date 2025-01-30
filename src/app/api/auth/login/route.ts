@@ -30,12 +30,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: 'Token is required' }, { status: 400 });
   }
 
-  const googleUserResponse = await fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', {
+  const googleUser = await fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  });
-  const googleUser = (await googleUserResponse.json()) as GoogleUserInfo;
+  }).then<GoogleUserInfo>((res) => res.json());
 
   const userResponse = await fetch(
     `${process.env.API_BASE_URL}/api/auth/verify-user?email=${googleUser.email}`,
