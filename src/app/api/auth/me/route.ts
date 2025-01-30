@@ -1,12 +1,14 @@
 import { get } from '@/app/lib/cf';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { verifyAccessToken } from '@/app/lib/auth';
 import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
+import { cookies } from 'next/headers';
 
 export const runtime = 'edge';
 
-export async function GET(request: NextRequest) {
-  const accessToken = request.cookies.get(AUTH_ACCESS_TOKEN)?.value;
+export async function GET() {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get(AUTH_ACCESS_TOKEN)?.value;
 
   if (!accessToken) {
     return NextResponse.json(null, { status: 401 });

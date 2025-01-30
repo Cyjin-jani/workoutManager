@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 import type { User } from '@prisma/client';
 import { createAccessToken } from '@/app/lib/auth';
 import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
+import { cookies } from 'next/headers';
 
 type RequestBody = {
   token: string;
@@ -23,6 +24,7 @@ export const runtime = 'edge';
 const COOKIE_EXPIRE_IN_1_WEEK = 7;
 
 export async function POST(request: NextRequest) {
+  const cookieStore = await cookies();
   const body = await request.json();
   const { token } = body as RequestBody;
 
@@ -57,7 +59,7 @@ export async function POST(request: NextRequest) {
     const accessToken = await createAccessToken(newUser.id);
     const response = NextResponse.json({ message: '로그인 성공' }, { status: 200 });
 
-    response.cookies.set(AUTH_ACCESS_TOKEN, accessToken, {
+    cookieStore.set(AUTH_ACCESS_TOKEN, accessToken, {
       path: '/',
       httpOnly: true,
       maxAge: COOKIE_EXPIRE_IN_1_WEEK * 24 * 60 * 60,
@@ -69,7 +71,7 @@ export async function POST(request: NextRequest) {
   const accessToken = await createAccessToken(user.id);
   const response = NextResponse.json({ message: '로그인 성공' }, { status: 200 });
 
-  response.cookies.set(AUTH_ACCESS_TOKEN, accessToken, {
+  cookieStore.set(AUTH_ACCESS_TOKEN, accessToken, {
     path: '/',
     httpOnly: true,
     maxAge: COOKIE_EXPIRE_IN_1_WEEK * 24 * 60 * 60,
