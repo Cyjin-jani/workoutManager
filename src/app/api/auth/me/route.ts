@@ -19,7 +19,7 @@ export async function GET() {
     const { db } = await get();
     const user = await db.user.findUnique({
       where: {
-        id: payload.userId as number,
+        id: payload.userId,
       },
     });
 
