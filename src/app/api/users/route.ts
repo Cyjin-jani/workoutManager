@@ -1,5 +1,6 @@
-import { get } from '@/app/lib/cf';
 import { NextResponse } from 'next/server';
+
+import { get } from '@/app/lib/cf';
 
 export const runtime = 'edge';
 

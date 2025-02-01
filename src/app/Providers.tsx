@@ -1,9 +1,8 @@
 'use client';
 
-import { QueryClientProvider } from '@tanstack/react-query';
-import type * as React from 'react';
+import { QueryClientProvider, QueryClient, isServer } from '@tanstack/react-query';
 
-import { QueryClient, isServer } from '@tanstack/react-query';
+import type * as React from 'react';
 
 function makeQueryClient() {
   return new QueryClient({

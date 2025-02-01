@@ -8,10 +8,10 @@ const Users = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="flex gap-4 justify-center flex-col">
+    <div className="flex flex-col justify-center gap-4">
       {data &&
         data.map((user) => (
-          <div key={user.id} className="flex gap-2 items-center">
+          <div key={user.id} className="flex items-center gap-2">
             <p>{user.name}</p>
             <p>{user.email}</p>
           </div>

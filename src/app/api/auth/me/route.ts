@@ -1,8 +1,9 @@
-import { get } from '@/app/lib/cf';
-import { NextResponse } from 'next/server';
-import { verifyAccessToken } from '@/app/lib/auth';
-import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
 import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
+
+import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
+import { verifyAccessToken } from '@/app/lib/auth';
+import { get } from '@/app/lib/cf';
 
 export const runtime = 'edge';
 
