@@ -1,4 +1,5 @@
 import { SignJWT, jwtVerify } from 'jose';
+import { cookies } from 'next/headers';
 
 import type { User } from '@prisma/client';
 import type { JWTPayload } from 'jose';
@@ -27,4 +28,23 @@ export async function verifyAccessToken(token: string): Promise<UserAuthPayload>
     audience: AUDIENCE,
   });
   return payload;
+}
+
+export async function getAuthenticatedUser(): Promise<User | null> {
+  try {
+    const cookieStore = await cookies();
+    const response = await fetch(`${process.env.API_BASE_URL}/api/auth/me`, {
+      headers: {
+        Cookie: cookieStore.toString(),
+      },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return response.json();
+  } catch {
+    return null;
+  }
 }
