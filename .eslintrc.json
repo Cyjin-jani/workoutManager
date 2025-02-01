@@ -55,10 +55,8 @@
     "react/self-closing-comp": "error",
     "eqeqeq": "error",
     "no-unused-expressions": "error",
-    "no-duplicate-imports": "error",
     "prefer-const": "error",
     "no-var": "error",
-    "no-return-await": "error",
     "no-await-in-loop": "warn",
     "no-promise-executor-return": "error",
     "require-atomic-updates": "error"
