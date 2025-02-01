@@ -1,6 +1,6 @@
 'use client';
 
-import useUsers from './hooks/queries/useUsers';
+import useUsers from '@/app/hooks/queries/useUsers';
 
 const Users = () => {
   const { data, isLoading } = useUsers();

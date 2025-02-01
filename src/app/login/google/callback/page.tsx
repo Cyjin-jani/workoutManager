@@ -3,17 +3,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-
-type GoogleUserInfo = {
-  email: string;
-  family_name: string;
-  given_name: string;
-  id: string;
-  locale: string;
-  name: string;
-  picture: string;
-  verified_email: boolean;
-};
+import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
 
 export default function Page() {
   const router = useRouter();
@@ -22,39 +12,18 @@ export default function Page() {
     const handleAuth = async () => {
       const hash = location.hash.slice(1);
       const searchParams = new URLSearchParams(hash);
-      const access_token = searchParams.get('access_token');
+      const accessToken = searchParams.get(AUTH_ACCESS_TOKEN);
 
-      if (!access_token) {
+      if (!accessToken) {
         console.error('No access token found');
         router.push('/login');
         return;
       }
 
       try {
-        const { data: result } = await axios.get<GoogleUserInfo>(
-          'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
-          {
-            headers: {
-              Authorization: `Bearer ${access_token}`,
-            },
-          },
-        );
-        const userEmail = result.email;
-        const { data: user } = await axios.get(`/api/auth/verify-user`, {
-          params: {
-            email: userEmail,
-          },
+        await axios.post('/api/auth/login', {
+          token: accessToken,
         });
-
-        if (!user) {
-          await axios.post('/api/users', {
-            email: userEmail,
-            name: result.name,
-            profileUrl: result.picture,
-          });
-        }
-
-        // TODO: 세션/쿠키 설정하기 (로그인 처리)
         router.push('/');
       } catch (error) {
         console.error('Login failed:', error);
