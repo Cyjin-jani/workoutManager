@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
   }).then<GoogleUserInfo>((res) => res.json());
 
   const userResponse = await fetch(
-    `${process.env.API_BASE_URL}/api/auth/verify-user?email=${googleUser.email}`
+    `${process.env.API_BASE_URL}/api/auth/verify-user?${new URLSearchParams({ email: googleUser.email })}`
   );
   const user = (await userResponse.json()) as User;
 
