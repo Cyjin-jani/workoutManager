@@ -1,5 +1,4 @@
 import Image from 'next/image';
-
 import { getGoogleOAuthURL } from '@/app/login/lib/getGoogleOAuthURL';
 
 export default function Login() {

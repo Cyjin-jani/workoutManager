@@ -1,5 +1,4 @@
 import { SignJWT, jwtVerify } from 'jose';
-
 import type { User } from '@prisma/client';
 import type { JWTPayload } from 'jose';
 
