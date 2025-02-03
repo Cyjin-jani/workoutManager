@@ -1,9 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-interface MyAvatarProps {
-  profileUrl: string | null;
-  displayName: string | null;
+import type { User } from '@prisma/client';
+
+interface MyAvatarProps extends Pick<User, 'profileUrl'> {
+  displayName: User['name'];
 }
+
 export function MyAvatar({ profileUrl, displayName }: MyAvatarProps) {
   return (
     <Avatar className="h-[32px] w-[32px]">
