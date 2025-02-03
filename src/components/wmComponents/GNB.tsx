@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { MyAvatar } from '@/components/wmComponents/Avatar';
+import { MyButton } from '@/components/wmComponents/Button';
 
 import type { User } from '@prisma/client';
 
@@ -20,9 +21,11 @@ export function GNB({ user }: GNBProps) {
         {user ? (
           <MyAvatar profileUrl={user.profileUrl} displayName={user.name} />
         ) : (
-          <Link href="/login" className="text-muted-foreground text-sm hover:text-foreground">
-            로그인
-          </Link>
+          <MyButton asChild>
+            <Link href="/login" className="text-sm">
+              로그인
+            </Link>
+          </MyButton>
         )}
       </div>
     </nav>

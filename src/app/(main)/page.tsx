@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { getAuthenticatedUser } from '@/app/lib/auth';
+import { MyButton } from '@/components/wmComponents/Button';
 
 export default async function Home() {
   const user = await getAuthenticatedUser();
@@ -14,9 +15,9 @@ export default async function Home() {
             <p>로그인 된 유저의 화면입니다.</p>
           </div>
         ) : (
-          <Link href="/login" className="text-blue-500 hover:underline">
-            로그인하러 가기
-          </Link>
+          <MyButton variant="outline" asChild>
+            <Link href="/login">로그인하러 가기</Link>
+          </MyButton>
         )}
       </main>
     </div>
