@@ -8,10 +8,8 @@ interface MyAvatarProps extends Pick<User, 'profileUrl'> {
 
 export function MyAvatar({ profileUrl, displayName }: MyAvatarProps) {
   return (
-    <Avatar className="h-[32px] w-[32px]">
-      {profileUrl && (
-        <AvatarImage src={profileUrl} alt="profile avatar" className="h-[32px] w-[32px]" />
-      )}
+    <Avatar className="size-8">
+      {profileUrl && <AvatarImage src={profileUrl} alt="profile avatar" className="size-8" />}
       <AvatarFallback>{displayName?.slice(0, 2)}</AvatarFallback>
     </Avatar>
   );
