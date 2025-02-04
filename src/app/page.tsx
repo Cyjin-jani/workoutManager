@@ -1,6 +1,6 @@
+import type { User } from '@prisma/client';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import type { User } from '@prisma/client';
 
 export default async function Home() {
   const user = await getAuthenticatedUser();

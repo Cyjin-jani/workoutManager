@@ -1,8 +1,8 @@
-import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
 import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
 import { createAccessToken } from '@/app/lib/auth';
 import type { User } from '@prisma/client';
+import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 type RequestBody = {
