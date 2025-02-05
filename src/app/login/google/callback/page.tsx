@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
 import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react';
 
 export default function Page() {
   const router = useRouter();

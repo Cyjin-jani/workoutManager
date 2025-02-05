@@ -1,6 +1,6 @@
+import type { User } from '@prisma/client';
 import { SignJWT, jwtVerify } from 'jose';
 import type { JWTPayload } from 'jose';
-import type { User } from '@prisma/client';
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
 const ISSUER = 'workout-manager';
