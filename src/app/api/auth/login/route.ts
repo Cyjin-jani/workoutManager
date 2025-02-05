@@ -1,10 +1,8 @@
-import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
-
 import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
 import { createAccessToken } from '@/app/lib/auth';
-
 import type { User } from '@prisma/client';
+import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 type RequestBody = {
@@ -41,7 +39,7 @@ export async function POST(request: NextRequest) {
   }).then<GoogleUserInfo>((res) => res.json());
 
   const userResponse = await fetch(
-    `${process.env.API_BASE_URL}/api/auth/verify-user?email=${googleUser.email}`
+    `${process.env.API_BASE_URL}/api/auth/verify-user?${new URLSearchParams({ email: googleUser.email })}`
   );
   const user = (await userResponse.json()) as User;
 

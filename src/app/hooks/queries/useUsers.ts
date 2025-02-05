@@ -1,8 +1,7 @@
-import { queryOptions, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-
 import type { User } from '@prisma/client';
+import { queryOptions, useQuery } from '@tanstack/react-query';
 import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
+import axios from 'axios';
 import type { AxiosError } from 'axios';
 
 const fetchUsers = async (): Promise<User[]> => {
