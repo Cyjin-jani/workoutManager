@@ -1,10 +1,9 @@
+import { fetchAuthMe } from '@/app/hooks/queries/useAuthMe';
+import { MyButton } from '@/components/wmComponents/Button';
 import Link from 'next/link';
 
-import { getAuthenticatedUser } from '@/app/lib/auth';
-import { MyButton } from '@/components/wmComponents/Button';
-
 export default async function Home() {
-  const user = await getAuthenticatedUser();
+  const user = await fetchAuthMe();
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
