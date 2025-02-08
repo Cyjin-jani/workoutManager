@@ -1,7 +1,9 @@
+'use server';
+
+import { get } from '@/app/lib/cf';
 import type { User } from '@prisma/client';
 import { SignJWT, jwtVerify } from 'jose';
 import type { JWTPayload } from 'jose';
-import { cookies } from 'next/headers';
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
 const ISSUER = 'workout-manager';
@@ -29,21 +31,13 @@ export async function verifyAccessToken(token: string): Promise<UserAuthPayload>
   return payload;
 }
 
-export async function getAuthenticatedUser(): Promise<User | null> {
-  try {
-    const cookieStore = await cookies();
-    const response = await fetch(`${process.env.API_BASE_URL}/api/auth/me`, {
-      headers: {
-        Cookie: cookieStore.toString(),
-      },
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    return response.json();
-  } catch {
-    return null;
-  }
-}
+export const getAuthMe = async (accessToken: string) => {
+  const payload = await verifyAccessToken(accessToken);
+  const { db } = await get();
+  const user = await db.user.findUnique({
+    where: {
+      id: payload.userId,
+    },
+  });
+  return user;
+};
