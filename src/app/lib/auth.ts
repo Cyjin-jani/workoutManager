@@ -1,3 +1,6 @@
+'use server';
+
+import { get } from '@/app/lib/cf';
 import type { User } from '@prisma/client';
 import { SignJWT, jwtVerify } from 'jose';
 import type { JWTPayload } from 'jose';
@@ -27,3 +30,14 @@ export async function verifyAccessToken(token: string): Promise<UserAuthPayload>
   });
   return payload;
 }
+
+export const getAuthMe = async (accessToken: string) => {
+  const payload = await verifyAccessToken(accessToken);
+  const { db } = await get();
+  const user = await db.user.findUnique({
+    where: {
+      id: payload.userId,
+    },
+  });
+  return user;
+};
