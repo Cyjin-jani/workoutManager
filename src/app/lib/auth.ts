@@ -1,5 +1,3 @@
-'use server';
-
 import { get } from '@/app/lib/cf';
 import { env } from '@/env';
 import type { User } from '@prisma/client';
