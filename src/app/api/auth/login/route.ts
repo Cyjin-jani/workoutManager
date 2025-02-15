@@ -1,5 +1,6 @@
 import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
 import { createAccessToken } from '@/app/lib/auth';
+import { env } from '@/env';
 import type { User } from '@prisma/client';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
@@ -39,12 +40,12 @@ export async function POST(request: NextRequest) {
   }).then<GoogleUserInfo>((res) => res.json());
 
   const userResponse = await fetch(
-    `${process.env.API_BASE_URL}/api/auth/verify-user?${new URLSearchParams({ email: googleUser.email })}`
+    `${env.NEXT_PUBLIC_API_BASE_URL}/api/auth/verify-user?${new URLSearchParams({ email: googleUser.email })}`
   );
   const user = (await userResponse.json()) as User;
 
   if (!user) {
-    const createUserResponse = await fetch(`${process.env.API_BASE_URL}/api/users`, {
+    const createUserResponse = await fetch(`${env.NEXT_PUBLIC_API_BASE_URL}/api/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
