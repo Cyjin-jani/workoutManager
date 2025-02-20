@@ -3,15 +3,22 @@ import type { User } from '@prisma/client';
 import { isServer } from '@tanstack/react-query';
 
 export const fetchAuthMe = async (): Promise<User> => {
-  const headers = {
-    ...(isServer ? { Cookie: (await (await import('next/headers')).cookies()).toString() } : {}),
-  };
-  const response = await fetch(`${env.NEXT_PUBLIC_API_BASE_URL}/api/auth/me`, {
-    headers,
-  });
+  try {
+    const headers = {
+      ...(isServer ? { Cookie: (await (await import('next/headers')).cookies()).toString() } : {}),
+    };
 
-  if (!response.ok) {
-    throw new Error(`${response.status}`);
+    const response = await fetch(`${env.NEXT_PUBLIC_API_BASE_URL}/api/auth/me`, {
+      headers,
+    });
+
+    if (!response.ok) {
+      throw new Error(`${response.status}`);
+    }
+
+    const data = (await response.json()) as User;
+    return data;
+  } catch (error) {
+    throw new Error('Something went wrong!');
   }
-  return response.json();
 };
