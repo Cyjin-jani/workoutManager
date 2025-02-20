@@ -1,11 +1,10 @@
-'use server';
-
 import { get } from '@/app/lib/cf';
+import { env } from '@/env';
 import type { User } from '@prisma/client';
 import { SignJWT, jwtVerify } from 'jose';
 import type { JWTPayload } from 'jose';
 
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
+const JWT_SECRET = new TextEncoder().encode(env.JWT_SECRET_KEY);
 const ISSUER = 'workout-manager';
 const AUDIENCE = 'workout-manager-users';
 

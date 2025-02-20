@@ -1,4 +1,4 @@
-import { fetchAuthMe } from '@/app/hooks/queries/useAuthMe';
+import { fetchAuthMe } from '@/app/lib/fetchAuthMe';
 import { MyButton } from '@/components/wmComponents/Button';
 import Link from 'next/link';
 
