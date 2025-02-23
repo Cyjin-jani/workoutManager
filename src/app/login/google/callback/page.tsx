@@ -1,6 +1,6 @@
 'use client';
 
-import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
+import { AUTH_ACCESS_TOKEN_KEY } from '@/app/constants/auth';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -12,7 +12,7 @@ export default function Page() {
     const handleAuth = async () => {
       const hash = location.hash.slice(1);
       const searchParams = new URLSearchParams(hash);
-      const accessToken = searchParams.get(AUTH_ACCESS_TOKEN);
+      const accessToken = searchParams.get(AUTH_ACCESS_TOKEN_KEY);
 
       if (!accessToken) {
         console.error('No access token found');
