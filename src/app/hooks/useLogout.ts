@@ -1,9 +1,7 @@
 import { useAuthMeOptions } from '@/app/hooks/queries/useAuthMe';
 import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 
 export function useLogout() {
-  const router = useRouter();
   const queryClient = useQueryClient();
   const options = useAuthMeOptions();
 
@@ -18,7 +16,6 @@ export function useLogout() {
       }
 
       await queryClient.invalidateQueries({ queryKey: options.queryKey });
-      router.replace('/');
     } catch (error) {
       console.error('로그아웃 중 오류 발생:', error);
       throw error;
