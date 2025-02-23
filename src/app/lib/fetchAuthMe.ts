@@ -12,10 +12,6 @@ export const fetchAuthMe = async (): Promise<User> => {
       headers,
     });
 
-    if (!response.ok) {
-      throw new Error(`${response.status}`);
-    }
-
     const data: User = await response.json();
     return data;
   } catch (error) {
