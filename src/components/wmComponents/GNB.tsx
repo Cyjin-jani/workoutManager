@@ -1,8 +1,9 @@
 'use client';
 
+import { MyButton } from '@/components/wmComponents/Button';
+import ErrorBoundaryWithSuspense from '@/components/wmComponents/ErrorBoundary/ErrorBoundaryWithSuspense';
 import { GNBRightSection } from '@/components/wmComponents/GNBRightSection';
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 export function GNB() {
   return (
@@ -12,9 +13,18 @@ export function GNB() {
           Workout Manager
         </Link>
       </div>
-      <Suspense fallback={<div className="size-8 rounded-full bg-muted"></div>}>
+      <ErrorBoundaryWithSuspense
+        loadingFallback={<div className="size-8 rounded-full bg-muted"></div>}
+        errorFallback={
+          <MyButton variant="outline" asChild>
+            <Link href="/login" className="text-sm">
+              로그인
+            </Link>
+          </MyButton>
+        }
+      >
         <GNBRightSection />
-      </Suspense>
+      </ErrorBoundaryWithSuspense>
     </nav>
   );
 }
