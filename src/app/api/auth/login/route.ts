@@ -1,4 +1,4 @@
-import { AUTH_ACCESS_TOKEN } from '@/app/constants/auth';
+import { AUTH_ACCESS_TOKEN_KEY } from '@/app/constants/auth';
 import { createAccessToken } from '@/app/lib/auth';
 import { env } from '@/env';
 import type { User } from '@prisma/client';
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     const accessToken = await createAccessToken(newUser.id);
     const response = NextResponse.json({ message: '로그인 성공' }, { status: 200 });
 
-    cookieStore.set(AUTH_ACCESS_TOKEN, accessToken, {
+    cookieStore.set(AUTH_ACCESS_TOKEN_KEY, accessToken, {
       path: '/',
       httpOnly: true,
       maxAge: COOKIE_EXPIRE_IN_1_WEEK * 24 * 60 * 60,
@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
   const accessToken = await createAccessToken(user.id);
   const response = NextResponse.json({ message: '로그인 성공' }, { status: 200 });
 
-  cookieStore.set(AUTH_ACCESS_TOKEN, accessToken, {
+  cookieStore.set(AUTH_ACCESS_TOKEN_KEY, accessToken, {
     path: '/',
     httpOnly: true,
     maxAge: COOKIE_EXPIRE_IN_1_WEEK * 24 * 60 * 60,
