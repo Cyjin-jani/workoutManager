@@ -1,13 +1,12 @@
 import { AUTH_ACCESS_TOKEN_KEY } from '@/app/constants/auth';
 import { cookies } from 'next/headers';
-import { type NextRequest, NextResponse } from 'next/server';
+import { redirect } from 'next/navigation';
 
 export const runtime = 'edge';
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   const cookieStore = await cookies();
   cookieStore.delete(AUTH_ACCESS_TOKEN_KEY);
 
-  const response = NextResponse.redirect(new URL('/', request.url));
-  return response;
+  redirect('/');
 }
